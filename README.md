@@ -50,7 +50,6 @@ cd Sistema-de-Gest-o-Sustent-vel---Tatu--main
 
 ## Telas do Projeto
 
-*(Aqui você pode adicionar screenshots da aplicação)*
 
 **Página Inicial**
 ![Página Inicial](url_da_imagem_da_pagina_inicial)
