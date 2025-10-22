@@ -1,0 +1,558 @@
+/* ---------------------------------- */
+/* ESTILOS DA PÁGINA DO MAPA (mapa.css) */
+/* ---------------------------------- */
+
+/* --- 1. Layout Principal da Página --- */
+.map-layout {
+  display: flex;
+  height: 700px;
+  border: 1px solid var(--cor-borda);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* --- 2. Barra Lateral de Filtros --- */
+.sidebar-mapa {
+  width: 400px;
+  background: var(--cor-fundo-secao); /* Branco */
+  padding: 25px;
+  border-right: 1px solid var(--cor-borda);
+  overflow-y: auto;
+  height: 100%;
+}
+
+.sidebar-mapa h2 {
+  color: var(--cor-primaria-azul);
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--cor-borda);
+  padding-bottom: 10px;
+  font-size: 1.5rem; /* Ajuste tamanho */
+}
+
+.filter-group {
+  margin-bottom: 25px;
+}
+
+.filter-group h3 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600; /* Destaque */
+}
+
+.filter-group ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.filter-group li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.filter-group input[type="checkbox"] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--cor-primaria-azul);
+}
+
+.filter-group label {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* --- 3. Área do Mapa --- */
+.content-mapa {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  background-color: #e0e0e0;
+}
+
+/* --- 4. Botões da Barra Lateral --- */
+.cadastro-group {
+  margin-bottom: 25px;
+}
+
+.denuncia-group {
+  margin-top: 20px;
+  border-top: 1px solid var(--cor-borda);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.denuncia-texto {
+  font-size: 0.9rem;
+  color: var(--cor-texto-secundario);
+  margin: 0 0 10px 0;
+  padding: 0 5px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.btn-denuncia,
+.btn-cadastro {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+
+.btn-denuncia {
+  background-color: transparent;
+  color: var(--cor-terciaria-vermelho);
+  border-color: var(--cor-terciaria-vermelho);
+}
+.btn-denuncia:hover {
+  background-color: red;
+  color: white;
+}
+
+.btn-cadastro {
+  background-color: transparent;
+  color: var(--cor-verde-sustentavel);
+  border-color: var(--cor-verde-sustentavel);
+}
+.btn-cadastro:hover {
+  background-color: green;
+  color: white;
+}
+
+/* --- 5. Modal (Estilos Genéricos) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Fundo preto semi-transparente */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s 0.3s linear;
+}
+
+.modal-overlay.modal-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
+
+.modal-content {
+  background: var(--cor-fundo-secao); /* Fundo branco SÓLIDO */
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 500px;
+  z-index: 1001;
+  transform: translateY(-20px) scale(0.95);
+  transition: transform 0.3s ease-out;
+  /* --- MUDANÇA AQUI: Garante opacidade total --- */
+  opacity: 1;
+}
+
+.modal-active .modal-content {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--cor-borda);
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  color: var(--cor-primaria-azul);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.modal-close {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #aaa;
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 5px;
+}
+.modal-close:hover {
+  color: var(--cor-texto-escuro);
+}
+
+.modal-body p {
+  font-size: 1rem;
+  color: var(--cor-texto-secundario);
+  margin-bottom: 20px;
+}
+
+.modal-body label {
+  display: block;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: var(--cor-texto-escuro);
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.modal-body input[type="file"],
+.modal-body input[type="text"],
+.modal-body textarea,
+.modal-body select {
+  /* Adicionado select */
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 5px;
+  background-color: var(--cor-fundo);
+  box-sizing: border-box;
+}
+
+.modal-body input[type="file"] {
+  padding: 9px;
+  font-size: 0.9rem;
+}
+
+.modal-body textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-actions {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-actions button {
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-modal-primary {
+  background-color: var(--cor-primaria-azul);
+  color: var(--cor-texto-claro);
+}
+.btn-modal-primary:hover {
+  background-color: #081a2e;
+}
+.btn-modal-primary:disabled {
+  background-color: var(--cor-texto-secundario);
+  cursor: not-allowed;
+}
+
+.btn-modal-secondary {
+  background-color: var(--cor-fundo-secao);
+  color: var(--cor-primaria-azul);
+  border: 1px solid var(--cor-primaria-azul);
+}
+.btn-modal-secondary:hover {
+  background-color: var(--cor-fundo);
+}
+
+.icon-location {
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+/* Estilo para a lista de filtros DENTRO do modal de cadastro */
+.filtro-lista-modal {
+  list-style: none;
+  padding: 10px;
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: 5px;
+  max-height: 150px;
+  overflow-y: auto;
+  margin-left: 0;
+}
+.filtro-lista-modal li {
+  margin-bottom: 8px;
+}
+.filtro-lista-modal label {
+  font-size: 0.95rem;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* --- 6. Tabela de Horários de Coleta --- */
+.coleta-horarios-container {
+  background: var(--cor-fundo-secao);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--cor-borda);
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.coleta-horarios-container h2 {
+  font-size: 1.5rem;
+  color: var(--cor-primaria-azul);
+  margin-bottom: 25px;
+  border-bottom: 1px solid var(--cor-borda);
+  padding-bottom: 15px;
+}
+
+.coleta-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.coleta-table th,
+.coleta-table td {
+  text-align: left;
+  padding: 16px 10px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.coleta-table th {
+  color: var(--cor-texto-secundario);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  background-color: var(--cor-fundo);
+  font-weight: 600;
+}
+
+.coleta-table td:first-child {
+  font-weight: bold;
+  color: var(--cor-primaria-azul);
+}
+
+.coleta-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Estilos para os ícones de filtro (Sidebar) */
+.filtro-icone {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: -3px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.filtro-icone.papel {
+  background-color: #4a90e2;
+}
+.filtro-icone.plastico {
+  background-color: #f5a623;
+}
+.filtro-icone.vidro {
+  background-color: #7ed321;
+}
+.filtro-icone.eletronicos {
+  background-color: #9013fe;
+}
+.filtro-icone.organico {
+  background-color: #f88c52;
+}
+.filtro-icone.metal {
+  background-color: #d8d8d8;
+}
+.filtro-icone.pilhas {
+  background-color: #d0021b;
+}
+
+@media (max-width: 610px) {
+  /* --- AJUSTE CRÍTICO: Container e Espaçamento Geral --- */
+  .container {
+    padding: 0 15px; /* Reduz o padding lateral para ter mais espaço útil */
+    margin: 20px auto; /* Reduz a margem vertical do container */
+  }
+
+  .section-spacing {
+    margin-bottom: 30px; /* Reduz o espaçamento entre seções */
+  }
+
+  /* --- AJUSTE CRÍTICO: Header (Responsividade para 375px) --- */
+  .header-app {
+    padding: 15px 15px; /* Menor padding lateral */
+    flex-direction: column; /* Quebra o flex para o logo e navegação ficarem em linhas separadas */
+    align-items: flex-start; /* Alinha o conteúdo à esquerda */
+  }
+
+  /* Ajusta o espaçamento e tamanho do logo */
+  .header-app .header-logo-img {
+    height: 45px; /* Diminui a altura do logo */
+    margin-right: 10px;
+  }
+  .header-app .logo-text strong {
+    font-size: 1.2rem; /* Reduz o texto principal */
+  }
+  .header-app .logo-text span {
+    font-size: 0.8rem; /* Reduz o subtítulo */
+  }
+
+  /* Ajusta a navegação */
+  .header-app .nav-app {
+    width: 100%; /* Ocupa toda a largura abaixo do logo */
+    flex-wrap: wrap; /* Permite que os itens quebrem linha */
+    justify-content: center; /* Centraliza os botões */
+    margin-top: 10px; /* Adiciona espaço entre logo e navegação */
+    gap: 8px; /* Espaçamento entre os botões */
+  }
+  .header-app .nav-app a {
+    padding: 8px 12px; /* Reduz o padding dos botões */
+    font-size: 0.85rem; /* Reduz a fonte dos botões */
+    white-space: normal; /* Permite a quebra de texto */
+  }
+
+  /* --- 1. Layout Principal da Página (Ajuste Crítico) --- */
+  .map-layout {
+    flex-direction: column;
+    height: auto;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    min-height: 500px;
+  }
+
+  /* --- 2. Barra Lateral de Filtros (Ajuste Crítico) --- */
+  .sidebar-mapa {
+    width: 100%;
+    padding: 20px 15px;
+    border-right: none;
+    border-bottom: 1px solid var(--cor-borda);
+    height: auto;
+    overflow-y: visible;
+  }
+
+  .sidebar-mapa h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+  }
+
+  .filter-group {
+    margin-bottom: 20px;
+  }
+  .filter-group h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  .filter-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* --- 3. Área do Mapa (Ajuste Crítico) --- */
+  .content-mapa {
+    width: 100%;
+    height: 400px;
+  }
+
+  /* --- 4. Botões da Barra Lateral --- */
+  .btn-denuncia,
+  .btn-cadastro {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  /* --- 5. Modal (Ajustes de Fonte/Tamanho) --- */
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .modal-close {
+    font-size: 1.8rem;
+  }
+
+  .modal-body input[type="text"],
+  .modal-body textarea,
+  .modal-body select {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .modal-actions button {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  /* --- 6. Tabela de Horários de Coleta (AJUSTE CORRIGIDO) --- */
+  .coleta-horarios-container {
+    padding: 15px;
+    margin-top: 20px;
+  }
+
+  .coleta-horarios-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+
+  .coleta-table {
+    /* Remove o display: block; daqui e garante a rolagem no container */
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    display: block; /* Mantém o display block na tabela para aplicar o overflow */
+    overflow-x: auto; /* CRÍTICO: Rolagem horizontal para a tabela */
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap; /* Impede a quebra de texto nas células (o que causou o problema) */
+  }
+
+  /* Remove os comandos display: block do thead e tbody que estavam quebrando as células */
+  .coleta-table thead,
+  .coleta-table tbody {
+    display: table-header-group; /* Volta ao comportamento padrão de tabela */
+  }
+
+  .coleta-table th,
+  .coleta-table td {
+    padding: 12px 8px;
+    font-size: 0.9rem;
+    white-space: nowrap; /* Garante que o texto nas células não quebre (reforço) */
+  }
+
+  .coleta-table th {
+    font-size: 0.75rem;
+  }
+}

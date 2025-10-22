@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Tatuí Sustentável</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/dashboard.css?v=1.2"> 
+</head>
+
+<body>
+    <header class="header-app">
+        <a href="../index.html" class="logo-link">
+            <img src="./assets/brasao-tatui.webp" alt="Brasão de Tatuí" class="header-logo-img"> 
+            <div class="logo-text">
+                <strong>Prefeitura de Tatuí</strong>
+                <span><b>Sistema de Gestão Sustentável</b></span>
+            </div>
+        </a>
+        <ul class="nav-app">
+            <li><a href="../index.html">Início</a></li> 
+            <li><a href="mapa.html">Onde Descartar?</a></li> 
+            <li><a href="dashboard.html" class="active">Visão Geral</a></li> 
+        </ul>
+    </header>
+
+    <main class="container">
+
+        <div class="dashboard-header">
+            <h1>Visão Geral de Sustentabilidade</h1>
+        </div>
+
+        <section class="kpi-grid">
+
+            <div class="card-dash kpi-card">
+                <span class="kpi-icon energia">⚡</span>
+                <div class="kpi-info">
+                    <h3>Energia Pública</h3>
+                    <p class="kpi-value">142.8 MWh</p>
+                    <p class="kpi-change positive">▲ 5.2% vs. mês anterior</p>
+                </div>
+            </div>
+
+            <div class="card-dash kpi-card">
+                <span class="kpi-icon agua">💧</span>
+                <div class="kpi-info">
+                    <h3>Consumo Hídrico</h3>
+                    <p class="kpi-value">38.9 mil m³</p>
+                    <p class="kpi-change negative">▼ 12.3% vs. mês anterior</p>
+                </div>
+            </div>
+
+            <div class="card-dash kpi-card">
+                <span class="kpi-icon lixo">♻️</span>
+                <div class="kpi-info">
+                    <h3>Resíduos Coletados</h3>
+                    <p class="kpi-value">2.847 ton</p>
+                    <p class="kpi-change negative">▼ 3.8% vs. mês anterior</p>
+                </div>
+            </div>
+
+            <div class="card-dash kpi-card">
+                <span class="kpi-icon papel">📄</span>
+                <div class="kpi-info">
+                    <h3>Emissões (Papel)</h3>
+                    <p class="kpi-value">847 ton CO₂</p>
+                    <p class="kpi-change negative">▼ 8.5% vs. mês anterior</p>
+                </div>
+            </div>
+
+            <div class="card-dash kpi-card">
+                <span class="kpi-icon custo">💲</span> 
+                <div class="kpi-info">
+                    <h3>Custo de Energia</h3>
+                    <p class="kpi-value">R$ 75.800</p>
+                    <p class="kpi-change positive">▲ 4.1% vs. mês anterior</p>
+                </div>
+            </div>
+
+            <div class="card-dash kpi-card">
+                <span class="kpi-icon custo">💲</span>
+                <div class="kpi-info">
+                    <h3>Custo de Água</h3>
+                    <p class="kpi-value">R$ 12.200</p>
+                    <p class="kpi-change negative">▼ 2.0% vs. mês anterior</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="main-grid">
+
+            <div class="card-dash chart-container grid-col-span-3"> 
+                <div class="card-dash-header">
+                    <h2>Tendências de Consumo Municipal</h2>
+                </div>
+                <canvas id="graficoTendencias"></canvas>
+            </div>
+
+            <div class="card-dash metas-container">
+                <div class="card-dash-header">
+                    <h2>Metas de Sustentabilidade</h2>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-header">
+                        <span>Redução de Emissões</span>
+                        <span>82%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 82%;"></div>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-header">
+                        <span>Eficiência Energética</span>
+                        <span>68%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress energia" style="width: 68%;"></div>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-header">
+                        <span>Reciclagem Municipal</span>
+                        <span>89%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress papel" style="width: 89%;"></div>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-header">
+                        <span>Digitalização</span>
+                        <span>74%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress digital" style="width: 74%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-dash alerts-container">
+                <div class="card-dash-header">
+                    <h2>Alertas do Sistema</h2>
+                </div>
+                <ul class="alerts-list">
+                    <li class="alert-item">
+                        <span class="alert-icon warning">⚠️</span>
+                        <div class="alert-info">
+                            <p>Consumo Elevado - Iluminação Centro</p>
+                            <span class="alert-subtext">Praça da Matriz - 18% acima da média</span>
+                        </div>
+                    </li>
+                    <li class="alert-item">
+                        <span class="alert-icon success">✅</span>
+                        <div class="alert-info">
+                            <p>Meta Atingida - Reciclagem</p>
+                            <span class="alert-subtext">Bairro Jd. Residencial bateu a meta</span>
+                        </div>
+                    </li>
+                    <li class="alert-item">
+                        <span class="alert-icon info">ℹ️</span>
+                        <div class="alert-info">
+                            <p>Manutenção Preventiva</p>
+                            <span class="alert-subtext">Sistema HVAC - Próxima semana</span>
+                        </div>
+                    </li>
+                </ul>
+                <a href="#" class="alert-all">Ver Todos os Alertas</a>
+            </div>
+
+            <div class="card-dash predictive-container">
+                <div class="card-dash-header">
+                    <h2>Análise Preditiva e Recomendações</h2>
+                </div>
+                <div class="predictive-content">
+                    <div class="predictive-item">
+                        <h4>Previsão de Consumo de Energia (Out/2025)</h4>
+                        <p class="predictive-value">151.3 MWh</p>
+                        <span class="predictive-status status-alerta">Tendência 5% acima da meta</span>
+                    </div>
+                    <div class="predictive-item">
+                        <h4>Recomendação do Sistema</h4>
+                        <p class="predictive-recommendation">
+                            <span class="rec-icon">💡</span>
+                            <span>Consumo elevado detectado no Depto. Obras. <b>Recomendação:</b> Verificar HVAC noturno.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="card-dash ranking-container">
+            <div class="card-dash-header">
+                <h2>Desempenho Departamental (Consumo Total)</h2>
+            </div>
+            <table class="ranking-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Departamento</th>
+                        <th>Eficiência</th>
+                        <th>Energia (kWh)</th>
+                        <th>Água (m³)</th>
+                        <th>Papel (Resmas)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>🥇 1</td><td>Administração Central</td><td class="eficiencia-boa">94%</td><td>18.7</td><td>4.2</td><td>5</td></tr>
+                    <tr><td>🥈 2</td><td>Cultura e Turismo</td><td class="eficiencia-boa">91%</td><td>17.5</td><td>4.6</td><td>3</td></tr>
+                    <tr><td>🥉 3</td><td>Obras e Serviços</td><td class="eficiencia-media">87%</td><td>42.3</td><td>9.8</td><td>10</td></tr>
+                    <tr><td># 4</td><td>Saúde Pública</td><td class="eficiencia-media">85%</td><td>35.8</td><td>12.1</td><td>35</td></tr>
+                    <tr><td># 5</td><td>Educação Municipal</td><td class="eficiencia-ruim">82%</td><td>28.5</td><td>8.2</td><td>40</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <p>Projeto Ideathon - Semana Tech 2025</p>
+        <div class="footer-logos">
+            <img src="./assets/brasao-tatui.webp" alt="Brasão de Tatuí">
+            <img src="./assets/logo-fatec.png" alt="Logo Fatec Tatuí">
+            <img src="./assets/logo-point-media.jpg" alt="Logo Point Media">
+        </div>
+        <p>&copy; 2025 - Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/global.js"></script> 
+
+</body>
+</html>

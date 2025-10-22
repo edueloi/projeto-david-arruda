@@ -1,0 +1,501 @@
+/* ---------------------------------- */
+/* ESTILOS DO DASHBOARD (dashboard.css) */
+/* ---------------------------------- */
+
+.container {
+  max-width: 1600px;
+}
+
+.dashboard-header {
+  margin: 10px 0 30px 0;
+}
+.dashboard-header h1 {
+  color: var(--cor-primaria-azul);
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+/* --- Base dos Cards --- */
+.card-dash {
+  background-color: var(--cor-fundo-secao); /* Fundo branco */
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--cor-borda);
+  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.card-dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--cor-borda);
+  padding-bottom: 10px;
+  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.card-dash-header h2 {
+  font-size: 1.25rem;
+  color: var(--cor-primaria-azul);
+  font-weight: 600;
+  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.card-dash:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* --- KPIs --- */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.kpi-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+}
+.kpi-icon {
+  font-size: 2rem;
+  padding: 12px;
+  border-radius: 50%;
+  background-color: var(--cor-fundo);
+  line-height: 1;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.kpi-icon.energia {
+  color: #f5a623;
+}
+.kpi-icon.agua {
+  color: #4a90e2;
+}
+.kpi-icon.papel {
+  color: #50e3c2;
+}
+.kpi-icon.lixo {
+  color: #7ed321;
+}
+.kpi-icon.custo {
+  color: var(--cor-verde-sustentavel);
+}
+
+.kpi-info h3 {
+  font-size: 0.85rem;
+  color: var(--cor-texto-secundario);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+.kpi-info .kpi-value {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--cor-texto-escuro);
+  line-height: 1.2;
+}
+.kpi-info .kpi-change {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-top: 3px;
+}
+.kpi-change.positive {
+  color: var(--cor-terciaria-vermelho);
+}
+.kpi-change.negative {
+  color: var(--cor-verde-sustentavel);
+}
+
+/* --- Grid Principal --- */
+.main-grid {
+  display: grid;
+  /* Define explicitamente 3 colunas */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Card do gráfico principal ocupando 3 colunas (linha inteira) */
+.chart-container.grid-col-span-3 {
+  grid-column: 1 / -1; /* Ocupa da primeira à última coluna */
+}
+.chart-container canvas {
+  width: 100% !important;
+  max-height: 350px;
+}
+
+/* Cards menores (Metas, Alertas, Preditivo) ocupando 1 coluna */
+.metas-container,
+.alerts-container,
+.predictive-container {
+  grid-column: span 1; /* Garante que cada um ocupe apenas 1 coluna */
+}
+
+/* Responsividade do Grid Principal */
+@media (max-width: 1200px) {
+  .main-grid {
+    /* Em telas médias, passa para 2 colunas */
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .chart-container.grid-col-span-3 {
+    /* Gráfico principal ocupa 2 colunas */
+    grid-column: span 2;
+  }
+  /* Cards menores se ajustam, podendo ficar 2 na linha ou 1+1 */
+  .metas-container,
+  .alerts-container,
+  .predictive-container {
+    grid-column: span 1; /* Mantém 1 coluna por padrão */
+  }
+  /* Se quiser que o último ocupe 2 colunas se sobrar espaço: */
+  /* .predictive-container:last-child { 
+        grid-column: span 2; 
+    } */
+}
+@media (max-width: 768px) {
+  .main-grid {
+    /* Em telas pequenas, passa para 1 coluna */
+    grid-template-columns: 1fr;
+  }
+  /* Todos os cards ocupam 1 coluna */
+  .chart-container.grid-col-span-3,
+  .metas-container,
+  .alerts-container,
+  .predictive-container {
+    grid-column: span 1;
+  }
+}
+
+/* --- Alertas, Metas, etc. --- */
+.alerts-list {
+  list-style: none;
+  padding-left: 0;
+}
+.alert-item {
+  display: flex;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--cor-borda);
+}
+.alert-item:last-child {
+  border-bottom: none;
+}
+.alert-icon {
+  font-size: 1.2rem;
+}
+.alert-icon.warning {
+  color: var(--cor-secundaria-dourado);
+}
+.alert-icon.info {
+  color: var(--cor-primaria-azul);
+}
+.alert-icon.success {
+  color: var(--cor-verde-sustentavel);
+}
+.alert-info p {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.alert-info .alert-subtext {
+  font-size: 0.85rem;
+  color: var(--cor-texto-secundario);
+  margin-top: 2px;
+}
+.alert-all {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--cor-primaria-azul);
+}
+.meta-item {
+  margin-bottom: 18px;
+}
+.meta-item:last-child {
+  margin-bottom: 5px;
+}
+.meta-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+.meta-header span:first-child {
+  font-weight: bold;
+}
+.meta-header span:last-child {
+  font-weight: bold;
+  color: var(--cor-primaria-azul);
+}
+.progress-bar {
+  width: 100%;
+  height: 15px;
+  background-color: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.progress {
+  height: 100%;
+  background-color: var(--cor-primaria-azul);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+.progress.energia {
+  background-color: #f5a623;
+}
+.progress.papel {
+  background-color: #7ed321;
+}
+.progress.digital {
+  background-color: #4a90e2;
+}
+
+/* --- Tabela de Ranking --- */
+.ranking-container {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.ranking-table th,
+.ranking-table td {
+  text-align: left;
+  padding: 14px 10px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+.ranking-table th {
+  color: var(--cor-texto-secundario);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  background-color: var(--cor-fundo);
+}
+.ranking-table td:nth-child(2) {
+  font-weight: bold;
+  color: var(--cor-primaria-azul);
+}
+.eficiencia-boa {
+  font-weight: bold;
+  color: var(--cor-verde-sustentavel);
+}
+.eficiencia-media {
+  font-weight: bold;
+  color: var(--cor-secundaria-dourado);
+}
+.eficiencia-ruim {
+  font-weight: bold;
+  color: var(--cor-terciaria-vermelho);
+}
+
+/* --- Card Preditivo --- */
+.predictive-item {
+  margin-bottom: 20px;
+}
+.predictive-item:last-child {
+  margin-bottom: 0;
+}
+.predictive-item h4 {
+  color: var(--cor-texto-secundario);
+  font-size: 1rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.predictive-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--cor-primaria-azul);
+}
+.predictive-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+.status-alerta {
+  background-color: #ffe5e5;
+  color: var(--cor-terciaria-vermelho);
+}
+.predictive-recommendation {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background-color: var(--cor-fundo);
+  padding: 15px;
+  border-radius: 6px;
+  border-left: 4px solid var(--cor-secundaria-dourado);
+  margin-top: 15px;
+}
+.rec-icon {
+  font-size: 1.5rem;
+  color: var(--cor-secundaria-dourado);
+}
+
+@media (max-width: 610px) {
+
+
+    .container {
+        padding: 0 15px; /* Reduz o padding lateral para ter mais espaço útil */
+        margin: 20px auto; /* Reduz a margem vertical do container */
+    }
+
+    .section-spacing {
+        margin-bottom: 30px; /* Reduz o espaçamento entre seções */
+    }
+
+    /* --- AJUSTE CRÍTICO: Header e Navegação --- */
+    .header-app {
+        padding: 15px 15px; /* Menor padding lateral no header */
+        flex-direction: column; /* Empilha o logo e a navegação */
+        align-items: flex-start; /* Alinha o conteúdo à esquerda */
+    }
+
+    /* Ajuste do Logo */
+    .header-app .header-logo-img { 
+        height: 45px; /* Diminui a altura do logo */
+        margin-right: 10px;
+    }
+    .header-app .logo-text strong { 
+        font-size: 1.2rem; /* Reduz o texto principal do logo */
+    }
+    .header-app .logo-text span { 
+        font-size: 0.8rem; /* Reduz o subtítulo do logo */
+    }
+
+    /* Ajuste da Navegação */
+    .header-app .nav-app {
+        width: 100%; /* Ocupa toda a largura */
+        flex-wrap: wrap; /* Permite que os botões quebrem linha */
+        justify-content: center; /* Centraliza os botões */
+        margin-top: 10px; 
+        gap: 8px; 
+    }
+    .header-app .nav-app a {
+        padding: 8px 12px; /* Reduz o padding dos botões de navegação */
+        font-size: 0.85rem; /* Reduz a fonte dos botões */
+        white-space: normal;
+    }
+    
+    
+    /* --- Hero Banner --- */
+    .hero-banner {
+        padding: 30px 15px 40px 15px;
+    }
+    .hero-banner h1 {
+        font-size: 1.8rem;
+    }
+    .hero-banner p {
+        font-size: 1rem;
+    }
+    
+    /* --- Container Lado a Lado --- */
+    .secoes-lado-a-lado {
+        flex-direction: column;
+    }
+    .secoes-lado-a-lado > section {
+         margin-bottom: 30px; 
+    }
+    
+    /* --- Seções "Por que Cuidar?" (7) e "Guia Rápido" (8) --- */
+    .info-sustentabilidade h2, .guia-sustentabilidade h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    .info-card, .guia-card {
+        gap: 10px;
+        padding: 12px;
+    }
+    .info-text p, .guia-text p { 
+        font-size: 0.95rem; 
+    }
+    .info-icon-wrapper, .guia-icon-wrapper {
+        width: 35px; 
+        height: 35px;
+    }
+    .info-icon, .guia-icon {
+        font-size: 1.2rem;
+    }
+
+    /* --- Destaque Links (9) --- */
+    .link-destaque-container {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    .link-botao {
+        font-size: 0.9rem;
+    }
+
+    /* --- Cards Informativos (10) --- */
+    .cards-informativos {
+        grid-template-columns: 1fr; 
+        gap: 15px;
+    }
+    .card { 
+        padding: 20px;
+    }
+    .card h3 { 
+        font-size: 1.2rem;
+    }
+    
+    .ranking-container {
+
+        overflow-x: visible; 
+    }
+
+    .ranking-table th:nth-child(4), 
+    .ranking-table td:nth-child(4), 
+    .ranking-table th:nth-child(5), 
+    .ranking-table td:nth-child(5), 
+    .ranking-table th:nth-child(6), 
+    .ranking-table td:nth-child(6) {
+        display: none !important; 
+    }
+    
+    .ranking-table th:nth-child(2),
+    .ranking-table td:nth-child(2) {
+        width: 55%; 
+    }
+
+    /* --- Ajuste no Rodapé (11) --- */
+    .main-footer {
+        padding: 20px 15px;
+        margin-top: 30px;
+    }
+    .footer-logos {
+        gap: 15px; 
+        flex-wrap: wrap; 
+    }
+    .footer-logos img {
+        max-height: 30px; 
+    }
+
+    .container {
+        padding: 0 15px;
+        margin: 20px auto; 
+    }
+
+    /* --- NOVO AJUSTE CRÍTICO: Centraliza o título principal --- */
+    .dashboard-header {
+        text-align: center; 
+        padding: 0 15px;
+    }
+    /* Opcional: Ajuste o tamanho do título para caber melhor */
+    .dashboard-header h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+}
