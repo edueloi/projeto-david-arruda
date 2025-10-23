@@ -7,11 +7,16 @@
     <title>Onde Descartar? | Tatuí Sustentável</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mapa.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="icon" href="./assets/brasao-tatui.webp" type="image/webp">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
+    <div id="loading-screen">
+        <img src="./assets/brasao-tatui.webp" alt="Carregando..." class="loading-logo">
+        <div class="loading-spinner"></div>
+    </div>
 
     <header class="header-app">
         <a href="../index.html" class="logo-link">
@@ -21,52 +26,60 @@
                 <span><b>Sistema de Gestão Sustentável</b></span>
             </div>
         </a>
+
         <ul class="nav-app">
             <li><a href="../index.html">Início</a></li>
-            <li><a href="mapa.html" class="active">Onde Descartar?</a></li>
+            <li><a href="mapa.html">Onde Descartar?</a></li>
             <li><a href="dashboard.html">Visão Geral</a></li>
+            <li><a href="contato.html">Contato</a></li>
         </ul>
+
+        <button class="hamburger-menu" id="hamburger-menu">
+            <span class="hamburger-icon"></span>
+            <span class="hamburger-icon"></span>
+            <span class="hamburger-icon"></span>
+        </button>
     </header>
 
-    <main class="container">
+    <nav id="mobile-menu" class="mobile-nav-overlay">
+        <div class="mobile-nav-panel">
+            <div class="mobile-nav-header">
+                <img src="./assets/brasao-tatui.webp" alt="Brasão de Tatuí" class="menu-header-logo">
+                <span>Menu Principal</span>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="../index.html"><i class="fas fa-home menu-icon"></i><span>Início</span></a></li>
+                <li><a href="mapa.html"><i class="fas fa-map-marked-alt menu-icon"></i><span>Onde Descartar?</span></a></li>
+                <li><a href="dashboard.html"><i class="fas fa-chart-line menu-icon"></i><span>Visão Geral</span></a></li>
+                <li><a href="contato.html"><i class="fas fa-envelope menu-icon"></i><span>Contato</span></a></li>
+            </ul>
+        </div>
+    </nav>
 
+    <main class="container">
         <div class="map-layout">
             <aside class="sidebar-mapa">
                 <h2>Filtros</h2>
-
                 <div class="filter-group">
                     <h3>Tipos de Resíduo</h3>
                     <ul id="lista-filtros-tipo">
-                        <li><label><input type="checkbox" class="filtro-tipo" value="papel"> <span
-                                    class="filtro-icone papel"></span> Papel</label></li>
-                        <li><label><input type="checkbox" class="filtro-tipo" value="plastico"> <span
-                                    class="filtro-icone plastico"></span> Plástico</label></li>
-                        <li><label><input type="checkbox" class="filtro-tipo" value="vidro"> <span
-                                    class="filtro-icone vidro"></span> Vidro</label></li>
-                        <li><label><input type="checkbox" class="filtro-tipo" value="eletronicos"> <span
-                                    class="filtro-icone eletronicos"></span> Eletrônicos</label></li>
-                        <li><label><input type="checkbox" class="filtro-tipo" value="organico"> <span
-                                    class="filtro-icone organico"></span> Orgânico</label></li>
-                        <li><label><input type="checkbox" class="filtro-tipo" value="metal"> <span
-                                    class="filtro-icone metal"></span> Metal</label></li>
-                        <li><label><input type="checkbox" class="filtro-tipo" value="pilhas"> <span
-                                    class="filtro-icone pilhas"></span> Pilhas e Baterias</label></li>
+                        <li><label><input type="checkbox" class="filtro-tipo" value="papel"> <span class="filtro-icone papel"></span> Papel</label></li>
+                        <li><label><input type="checkbox" class="filtro-tipo" value="plastico"> <span class="filtro-icone plastico"></span> Plástico</label></li>
+                        <li><label><input type="checkbox" class="filtro-tipo" value="vidro"> <span class="filtro-icone vidro"></span> Vidro</label></li>
+                        <li><label><input type="checkbox" class="filtro-tipo" value="eletronicos"> <span class="filtro-icone eletronicos"></span> Eletrônicos</label></li>
+                        <li><label><input type="checkbox" class="filtro-tipo" value="organico"> <span class="filtro-icone organico"></span> Orgânico</label></li>
+                        <li><label><input type="checkbox" class="filtro-tipo" value="metal"> <span class="filtro-icone metal"></span> Metal</label></li>
+                        <li><label><input type="checkbox" class="filtro-tipo" value="pilhas"> <span class="filtro-icone pilhas"></span> Pilhas e Baterias</label></li>
                     </ul>
                 </div>
 
                 <div class="cadastro-group">
-                    <button id="btn-abrir-modal-cadastro" class="btn-cadastro">
-                        ✚ Cadastrar Ecoponto
-                    </button>
+                    <button id="btn-abrir-modal-cadastro" class="btn-cadastro">✚ Cadastrar Ecoponto</button>
                 </div>
 
                 <div class="filter-group denuncia-group">
-                    <p class="denuncia-texto">
-                        <b> Ajude-nos a manter a cidade limpa! Denuncie locais com descarte ilegal de entulho. </b>
-                    </p>
-                    <button id="btn-abrir-modal-denuncia" class="btn-denuncia">
-                        » Denunciar Entulho
-                    </button>
+                    <p class="denuncia-texto"><b>Ajude-nos a manter a cidade limpa! Denuncie locais com descarte ilegal de entulho.</b></p>
+                    <button id="btn-abrir-modal-denuncia" class="btn-denuncia">» Denunciar Entulho</button>
                 </div>
             </aside>
 
@@ -111,74 +124,11 @@
         </section>
     </main>
 
-
     <div id="modal-denuncia-overlay" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Denunciar Local com Entulho</h2>
-                <button id="modal-close-btn" class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Anexe uma foto e escolha como fornecer a localização do entulho.</p>
-                <form id="form-denuncia">
-                    <label for="foto-entulho">Anexar Foto (Obrigatório)</label>
-                    <input type="file" id="foto-entulho" name="foto-entulho" accept="image/*" required>
-                    <label for="endereco-entulho">Endereço (Opcional)</label>
-                    <input type="text" id="endereco-entulho" name="endereco-entulho"
-                        placeholder="Ex: Rua XV de Novembro, em frente ao nº 500">
-                    <label for="obs-entulho">Observações (Opcional)</label>
-                    <textarea id="obs-entulho" name="obs-entulho" rows="3"
-                        placeholder="Ex: Entulho na esquina com a Rua..."></textarea>
-                    <div class="modal-actions">
-                        <button type="button" id="btn-usar-localizacao" class="btn-modal-primary"><span
-                                class="icon-location">📌</span> Usar Minha Localização</button>
-                        <button type="submit" id="btn-enviar-endereco" class="btn-modal-secondary">Enviar com
-                            Endereço</button>
-                    </div>
-                </form>
-            </div>
         </div>
-    </div>
-
     <div id="modal-cadastro-overlay" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Sugerir Novo Ecoponto</h2>
-                <button id="modal-cadastro-close-btn" class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Preencha os dados do ponto de coleta. Sua sugestão será enviada para validação.</p>
-                <form id="form-cadastro">
-                    <label for="nome-ponto">Nome do Ponto (Obrigatório)</label>
-                    <input type="text" id="nome-ponto" name="nome-ponto" placeholder="Ex: Supermercado São Roque"
-                        required>
-                    <label for="endereco-ponto">Endereço (Obrigatório)</label>
-                    <input type="text" id="endereco-ponto" name="endereco-ponto"
-                        placeholder="Ex: Rua Onze de Agosto, 1000" required>
-                    <label>Quais resíduos aceita? (Obrigatório)</label>
-                    <ul class="filtro-lista-modal">
-                        <li><label><input type="checkbox" name="tipos-ponto" value="papel"> <span
-                                    class="filtro-icone papel"></span> Papel</label></li>
-                        <li><label><input type="checkbox" name="tipos-ponto" value="plastico"> <span
-                                    class="filtro-icone plastico"></span> Plástico</label></li>
-                        <li><label><input type="checkbox" name="tipos-ponto" value="vidro"> <span
-                                    class="filtro-icone vidro"></span> Vidro</label></li>
-                        <li><label><input type="checkbox" name="tipos-ponto" value="eletronicos"> <span
-                                    class="filtro-icone eletronicos"></span> Eletrônicos</label></li>
-                        <li><label><input type="checkbox" name="tipos-ponto" value="organico"> <span
-                                    class="filtro-icone organico"></span> Orgânico</label></li>
-                        <li><label><input type="checkbox" name="tipos-ponto" value="metal"> <span
-                                    class="filtro-icone metal"></span> Metal</label></li>
-                        <li><label><input type="checkbox" name="tipos-ponto" value="pilhas"> <span
-                                    class="filtro-icone pilhas"></span> Pilhas e Baterias</label></li>
-                    </ul>
-                    <div class="modal-actions">
-                        <button type="submit" class="btn-modal-primary">Enviar Sugestão</button>
-                    </div>
-                </form>
-            </div>
         </div>
-    </div>
+
     <footer class="main-footer">
         <p>Projeto Ideathon - Semana Tech 2025</p>
         <div class="footer-logos">
@@ -186,13 +136,11 @@
             <img src="./assets/logo-fatec.png" alt="Logo Fatec Tatuí">
             <img src="./assets/logo-point-media.jpg" alt="Logo Point Media">
         </div>
-        <p>&copy; 2025 - Todos os direitos reservados.</p>
+        <p>© 2025 - Todos os direitos reservados.</p>
     </footer>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="js/mapa.js?v=1.3"></script>
-
+    <script src="js/global.js"></script>
 </body>
-
 </html>

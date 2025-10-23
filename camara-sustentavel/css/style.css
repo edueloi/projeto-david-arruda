@@ -1,6 +1,7 @@
 /* ---------------------------------- */
 /* ESTILOS GLOBAIS (style.css)        */
 /* Header Azul + Botões Novos         */
+/* Menu Hamburguer e Mobile Nav       */
 /* ---------------------------------- */
 
 /* --- 1. Reset Básico e Fontes --- */
@@ -17,16 +18,19 @@
     --cor-secundaria-dourado: #FDB913;
     --cor-terciaria-vermelho: #D42E12;
     --cor-verde-sustentavel: #28a745;
-    --cor-fundo: #eaf3fd; /* Fundo azul claro sutil */
-    --cor-fundo-secao: #FFFFFF; 
-    --cor-fundo-card-interno: #f8f9fa; 
+    --cor-fundo: #eaf3fd;
+    /* Fundo azul claro sutil */
+    --cor-fundo-secao: #FFFFFF;
+    --cor-fundo-card-interno: #f8f9fa;
     --cor-texto-escuro: #212529;
     --cor-texto-claro: #FFFFFF;
-    --cor-texto-secundario: #6c757d;
-    --cor-texto-header-claro: rgba(255, 255, 255, 0.85); /* Branco suave para header */
-    --cor-texto-header-ativo: #FFFFFF; /* Branco puro para ativo/hover */
+    --cor-texto-header-claro: rgba(255, 255, 255, 0.85);
+    /* Branco suave para header */
+    --cor-texto-header-ativo: #FFFFFF;
+    /* Branco puro para ativo/hover */
     --cor-borda: #dee2e6;
-    --cor-icone-wrapper: #eef3f5; 
+    --cor-icone-wrapper: #eef3f5;
+    --cor-overlay: rgba(0, 0, 0, 0.6); /* Nova cor para o overlay do menu mobile */
 }
 
 body {
@@ -35,161 +39,419 @@ body {
     line-height: 1.6;
 }
 
+/* Loading Screen Styles */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor-primaria-azul);
+    /* Match header background */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.7s ease-out;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-logo {
+    width: 150px;
+    /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid var(--cor-secundaria-dourado);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+}
+
 /* *** INÍCIO DA MUDANÇA: Header com Cores do Footer *** */
 /* --- 3. Header Padrão --- */
 .header-app {
     width: 100%;
-    background-color: var(--cor-primaria-azul); /* Fundo AZUL ESCURO */
-    padding: 15px 40px; 
+    background-color: var(--cor-primaria-azul);
+    /* Fundo AZUL ESCURO */
+    padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 3px solid var(--cor-secundaria-dourado); /* Borda DOURADA */
-    /* box-shadow removido */
+    border-bottom: 3px solid var(--cor-secundaria-dourado);
+    /* Borda DOURADA */
     position: sticky;
     top: 0;
     z-index: 1001;
-    
-
 }
+
 /* Logo */
 .header-app .logo-link {
     display: flex;
     align-items: center;
     text-decoration: none;
 }
-.header-app .header-logo-img { 
-    height: 60px; /* Levemente menor */
-    margin-right: 15px;
 
+.header-app .header-logo-img {
+    height: 60px;
+    margin-right: 15px;
 }
-.header-app .logo-text strong { 
-    color: var(--cor-texto-header-ativo); /* Branco */
-    font-size: 1.5rem; 
-    font-weight: 600; /* Um pouco menos forte */
+
+.header-app .logo-text strong {
+    color: var(--cor-texto-header-ativo);
+    font-size: 1.5rem;
+    font-weight: 600;
     line-height: 1.1;
     text-transform: uppercase;
-    display: block; 
+    display: block;
 }
-.header-app .logo-text span { 
-    color: var(--cor-texto-header-claro); 
-    font-size: 1rem; 
+
+.header-app .logo-text span {
+    color: var(--cor-texto-header-claro);
+    font-size: 1rem;
 }
-/* Navegação */
+
+/* Navegação Desktop (escondida no mobile) */
 .header-app .nav-app {
     list-style: none;
     display: flex;
-    align-items: center; 
+    align-items: center;
     margin: 0;
     padding: 0;
-    gap: 5px; 
+    gap: 5px;
 }
+
 .header-app .nav-app li {
-    margin: 0; 
+    margin: 0;
 }
+
 .header-app .nav-app a {
-    display: inline-block; 
+    display: inline-block;
     text-decoration: none;
-    color: var(--cor-texto-header-claro); /* Branco suave padrão */
-    font-weight: 500; 
+    color: var(--cor-texto-header-claro);
+    font-weight: 500;
     font-size: 0.95rem;
-    padding: 10px 18px; 
-    border-radius: 6px; 
-    transition: background-color 0.2s ease, color 0.2s ease; 
-    border: 1px solid transparent; 
-    white-space: nowrap; 
+    padding: 10px 18px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border: 1px solid transparent;
+    white-space: nowrap;
 }
+
 .header-app .nav-app a:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Fundo branco levemente transparente no hover */
-    color: var(--cor-texto-header-ativo); /* Branco puro no hover */
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--cor-texto-header-ativo);
 }
+
 .header-app .nav-app a.active {
-    background-color: rgba(255, 255, 255, 0.15); /* Fundo branco um pouco mais visível */
-    color: var(--cor-texto-header-ativo); /* Branco puro */
-    font-weight: 600; 
-    /* Sem borda colorida para um look mais clean */
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--cor-texto-header-ativo);
+    font-weight: 600;
 }
-/* *** FIM DA MUDANÇA *** */
+
+/* --- NOVO: Botão Hamburguer --- */
+/* --- NOVO: Botão Hamburguer --- */
+.hamburger-menu {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1002; /* Garante que fique acima de outros elementos */
+    width: 45px; /* Tamanho fixo para evitar que se mova */
+    height: 45px;
+    position: relative; /* Necessário para centralizar os ícones */
+}
+
+.hamburger-icon {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--cor-texto-claro);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+    position: absolute; /* Posição absoluta para animação */
+    left: 10px;
+}
+
+/* Posição inicial dos ícones */
+.hamburger-icon:nth-child(1) { top: 12px; }
+.hamburger-icon:nth-child(2) { top: 21px; }
+.hamburger-icon:nth-child(3) { top: 30px; }
+
+/* Animação do botão hambúrguer para "X" quando o menu estiver aberto */
+.hamburger-menu.open .hamburger-icon:nth-child(1) {
+    transform: rotate(45deg);
+    top: 21px;
+}
+.hamburger-menu.open .hamburger-icon:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-menu.open .hamburger-icon:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 21px;
+}
+
+/* --- NOVO: Menu Mobile Overlay (Estilo App de Banco) --- */
+.mobile-nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor-overlay);
+    z-index: 1000;
+    opacity: 0; /* Começa invisível */
+    visibility: hidden; /* Começa inacessível */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    display: flex; /* Usamos flex para posicionar o painel */
+}
+
+.mobile-nav-overlay.open {
+    opacity: 1; /* Fica visível */
+    visibility: visible; /* Fica acessível */
+}
+
+.mobile-nav-panel {
+    width: 280px; /* Largura do menu */
+    max-width: 80%; /* Garante que não ocupe a tela toda em telas muito pequenas */
+    height: 100%;
+    background-color: var(--cor-fundo-secao);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transform: translateX(-100%); /* Começa fora da tela à esquerda */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-nav-overlay.open .mobile-nav-panel {
+    transform: translateX(0); /* Desliza para dentro da tela */
+}
+
+.mobile-nav-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--cor-borda);
+    background-color: var(--cor-fundo);
+}
+
+.menu-header-logo {
+    height: 40px;
+    margin-right: 15px;
+}
+
+.mobile-nav-header span {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cor-primaria-azul);
+}
+
+.mobile-nav-links {
+    list-style: none;
+    padding: 20px 10px;
+    margin: 0;
+    flex-grow: 1; /* Ocupa o espaço restante */
+    overflow-y: auto; /* Adiciona scroll se os itens não couberem */
+}
+
+.mobile-nav-links li {
+    margin-bottom: 5px;
+}
+
+.mobile-nav-links a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--cor-texto-escuro);
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 15px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menu-icon {
+    width: 20px;
+    margin-right: 20px;
+    text-align: center;
+    color: #888;
+    transition: color 0.2s ease;
+}
+
+.mobile-nav-links a:hover {
+    background-color: var(--cor-fundo);
+}
+
+.mobile-nav-links a:hover .menu-icon {
+    color: var(--cor-primaria-azul);
+}
+
+.mobile-nav-links a.active {
+    background-color: var(--cor-primaria-azul);
+    color: var(--cor-texto-claro);
+    font-weight: 600;
+}
+
+.mobile-nav-links a.active .menu-icon {
+    color: var(--cor-secundaria-dourado); /* Dourado para o ícone ativo */
+}
+
+/* Botão de Fechar do Menu Mobile */
+.close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--cor-texto-escuro);
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1003; /* Acima de tudo no menu mobile */
+    transition: transform 0.2s ease;
+}
+
+.close-menu:hover {
+    transform: rotate(90deg);
+    color: var(--cor-terciaria-vermelho);
+}
 
 
 /* --- 4. Conteúdo Geral --- */
 .container {
-    max-width: 1300px; 
-    margin: 40px auto; 
-    padding: 0 25px; 
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 25px;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .section-spacing {
-    margin-bottom: 45px; 
+    margin-bottom: 45px;
 }
 
 /* Base para seções com fundo branco/cinza */
 .card-section {
-    padding: 30px 25px; 
+    padding: 30px 25px;
     border-radius: 8px;
     background: var(--cor-fundo-secao);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
-.card-section-alt { 
-    padding: 30px 25px; 
+
+.card-section-alt {
+    padding: 30px 25px;
     border-radius: 8px;
-    background: var(--cor-fundo); 
+    background: var(--cor-fundo);
 }
 
 /* --- 5. Hero Banner --- */
 .hero-banner {
     background: var(--cor-fundo-secao);
-    padding: 55px 30px 65px 30px; 
+    padding: 55px 30px 65px 30px;
     text-align: center;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
+
 .hero-banner h1 {
     color: var(--cor-primaria-azul);
-    font-size: 2.4rem; 
-    margin-bottom: 15px; 
-    font-weight: 700; 
+    font-size: 2.4rem;
+    margin-bottom: 15px;
+    font-weight: 700;
 }
+
 .hero-banner p {
-    font-size: 1.1rem; 
+    font-size: 1.1rem;
     color: var(--cor-texto-secundario);
-    max-width: 650px; 
+    max-width: 650px;
     margin-left: auto;
     margin-right: auto;
 }
 
 /* --- 6. Container Lado a Lado --- */
 .secoes-lado-a-lado {
-    display: flex; 
-    gap: 25px; 
-    align-items: stretch; 
+    display: flex;
+    gap: 25px;
+    align-items: stretch;
 }
 
-.secoes-lado-a-lado > section {
-    flex: 1 1 0%; 
-    min-width: 0; 
-    margin-bottom: 0; 
-    display: flex; 
-    flex-direction: column; 
-    height: 100%; 
+.secoes-lado-a-lado>section {
+    flex: 1 1 0%;
+    min-width: 0;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .secoes-lado-a-lado .link-destaque-container {
-    margin-top: auto; 
-    padding-top: 25px; 
+    margin-top: auto;
+    padding-top: 25px;
 }
 
 @media (max-width: 992px) {
     .secoes-lado-a-lado {
-        flex-direction: column; 
-        gap: 0; 
+        flex-direction: column;
+        gap: 0;
     }
-    .secoes-lado-a-lado > section {
-         margin-bottom: 45px; 
-         height: auto; 
+
+    .secoes-lado-a-lado>section {
+        margin-bottom: 45px;
+        height: auto;
     }
-    .secoes-lado-a-lado > section:last-child {
-         margin-bottom: 0; 
+
+    .secoes-lado-a-lado>section:last-child {
+        margin-bottom: 0;
     }
 }
 
@@ -198,64 +460,72 @@ body {
 .info-sustentabilidade h2 {
     text-align: center;
     color: var(--cor-primaria-azul);
-    font-size: 1.8rem; 
-    margin-bottom: 30px; 
+    font-size: 1.8rem;
+    margin-bottom: 30px;
     font-weight: 600;
 }
 
 .info-grid {
     display: grid;
-    grid-template-columns: 1fr; 
-    gap: 15px; 
-    margin-bottom: 25px; 
-    align-content: start; 
-    flex-grow: 1; 
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-content: start;
+    flex-grow: 1;
 }
+
 .info-card {
-    background: var(--cor-fundo-secao); 
-    padding: 15px; 
+    background: var(--cor-fundo-secao);
+    padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--cor-borda);
     display: flex;
     align-items: center;
     gap: 15px;
-    min-height: 70px; 
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; 
+    min-height: 70px;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
+
 .info-card.info-card-destaque {
-    border-left: 5px solid var(--cor-secundaria-dourado); 
-    padding-left: 10px; 
+    border-left: 5px solid var(--cor-secundaria-dourado);
+    padding-left: 10px;
 }
 
 .info-card:hover {
-    transform: translateY(-4px); 
-    box-shadow: 0 6px 12px rgba(0,0,0,0.08); 
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
 }
 
 .info-icon-wrapper {
-    flex-shrink: 0; 
-    width: 40px; 
-    height: 40px; 
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--cor-icone-wrapper); 
+    background-color: var(--cor-icone-wrapper);
 }
+
 .info-icon {
-    font-size: 1.4rem; 
+    font-size: 1.4rem;
 }
-.info-text { flex-grow: 1; }
-.info-text h3 { 
-    font-size: 0.85rem; 
-    color: var(--cor-texto-secundario); 
+
+.info-text {
+    flex-grow: 1;
+}
+
+.info-text h3 {
+    font-size: 0.85rem;
+    color: var(--cor-texto-secundario);
     text-transform: uppercase;
-    margin-bottom: 2px; 
+    margin-bottom: 2px;
     font-weight: 600;
 }
-.info-text p { 
-    font-size: 1rem; 
+
+.info-text p {
+    font-size: 1rem;
     color: var(--cor-texto-escuro);
     font-weight: bold;
     line-height: 1.3;
@@ -266,271 +536,309 @@ body {
 .guia-sustentabilidade h2 {
     text-align: center;
     color: var(--cor-primaria-azul);
-    font-size: 1.8rem; 
-    margin-bottom: 30px; 
+    font-size: 1.8rem;
+    margin-bottom: 30px;
     font-weight: 600;
 }
+
 .guia-grid {
     display: grid;
-    grid-template-columns: 1fr; 
-    gap: 15px; 
-    margin-bottom: 25px; 
-    align-content: start; 
-    flex-grow: 1; 
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-content: start;
+    flex-grow: 1;
 }
+
 .guia-card {
-    background: var(--cor-fundo-secao); 
-    padding: 15px; 
+    background: var(--cor-fundo-secao);
+    padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--cor-borda);
     display: flex;
     align-items: center;
     gap: 15px;
-    min-height: 70px; 
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; 
+    min-height: 70px;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
-.guia-card.erre-destaque:hover { 
-    transform: translateY(-4px); 
-    box-shadow: 0 6px 12px rgba(0,0,0,0.08); 
+
+.guia-card.erre-destaque:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
 }
 
 .guia-card.erre-destaque {
-    border-left: 5px solid var(--cor-secundaria-dourado); 
-    padding-left: 10px; 
+    border-left: 5px solid var(--cor-secundaria-dourado);
+    padding-left: 10px;
 }
 
 .guia-icon-wrapper {
-    flex-shrink: 0; 
-    width: 40px; 
-    height: 40px; 
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--cor-icone-wrapper); 
+    background-color: var(--cor-icone-wrapper);
 }
+
 .guia-icon {
-    font-size: 1.4rem; 
+    font-size: 1.4rem;
 }
-.guia-text { flex-grow: 1; }
-.guia-text h3 { 
-    font-size: 0.85rem; 
-    color: var(--cor-texto-secundario); 
+
+.guia-text {
+    flex-grow: 1;
+}
+
+.guia-text h3 {
+    font-size: 0.85rem;
+    color: var(--cor-texto-secundario);
     text-transform: uppercase;
-    margin-bottom: 2px; 
+    margin-bottom: 2px;
     font-weight: 600;
 }
-.guia-text p { 
-    font-size: 1rem; 
+
+.guia-text p {
+    font-size: 1rem;
     color: var(--cor-texto-escuro);
     font-weight: bold;
     line-height: 1.3;
 }
-.guia-text h4 { 
-    font-size: 0.95rem; 
+
+.guia-text h4 {
+    font-size: 0.95rem;
     color: var(--cor-primaria-azul);
-    margin-bottom: 3px; 
+    margin-bottom: 3px;
     font-weight: 600;
 }
-.guia-text a { 
-    font-size: 0.85rem; 
+
+.guia-text a {
+    font-size: 0.85rem;
     color: var(--cor-primaria-azul);
     font-weight: bold;
     text-decoration: none;
 }
-.guia-text a:hover { text-decoration: underline; }
-.guia-icon-wrapper.erre { background-color: var(--cor-secundaria-dourado); }
-.guia-icon-wrapper.erre span { font-size: 1rem; font-weight: bold; color: var(--cor-texto-escuro); }
+
+.guia-text a:hover {
+    text-decoration: underline;
+}
+
+.guia-icon-wrapper.erre {
+    background-color: var(--cor-secundaria-dourado);
+}
+
+.guia-icon-wrapper.erre span {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--cor-texto-escuro);
+}
 
 /* --- 9. Destaque Links (Vídeo/Curso) --- */
 .link-destaque-container {
-    margin-top: auto; 
+    margin-top: auto;
     padding: 20px;
-    background-color: var(--cor-fundo-secao); 
+    background-color: var(--cor-fundo-secao);
     border-radius: 8px;
-    border-top: 3px solid var(--cor-primaria-azul); 
+    border-top: 3px solid var(--cor-primaria-azul);
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--cor-borda);
-    margin-top: 25px; 
+    margin-top: 25px;
 }
 
 .link-descricao {
     font-size: 0.95rem;
     color: var(--cor-texto-secundario);
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
     line-height: 1.5;
 }
 
 .link-botao {
-    display: inline-block; 
-    padding: 10px 20px; 
-    background-color: var(--cor-primaria-azul); 
-    color: var(--cor-texto-claro); 
-    font-weight: 600; 
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--cor-primaria-azul);
+    color: var(--cor-texto-claro);
+    font-weight: 600;
     text-decoration: none;
     border-radius: 5px;
-    border: 1px solid var(--cor-primaria-azul); 
+    border: 1px solid var(--cor-primaria-azul);
     transition: all 0.3s ease;
-    font-size: 0.95rem; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    font-size: 0.95rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .link-botao:hover {
-    background-color: #081a2e; 
+    background-color: #081a2e;
     border-color: #081a2e;
     color: var(--cor-texto-claro);
-    transform: translateY(-2px); 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15); 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* --- 10. Cards Informativos (Mapa/Dashboard) --- */
 .cards-informativos {
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 25px; 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
 }
-.card { 
+
+.card {
     background: var(--cor-fundo-secao);
-    padding: 25px; 
-    width: 100%; 
+    padding: 25px;
+    width: 100%;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06); 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     border-left: 5px solid var(--cor-secundaria-dourado);
-    display: flex; 
-    flex-direction: column; 
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; 
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
+
 .card:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 8px 15px rgba(45, 55, 72, 0.1); 
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(45, 55, 72, 0.1);
 }
-.card h3 { 
-    color: var(--cor-primaria-azul); 
-    margin-bottom: 15px; 
-    font-size: 1.3rem; 
+
+.card h3 {
+    color: var(--cor-primaria-azul);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
     font-weight: 600;
 }
+
 .card p {
-    font-size: 0.95rem; 
-    margin-bottom: 20px; 
-    flex-grow: 1; 
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    flex-grow: 1;
 }
+
 .btn-card {
     display: inline-block;
     background-color: var(--cor-primaria-azul);
     color: var(--cor-texto-claro);
-    padding: 10px 18px; 
+    padding: 10px 18px;
     text-decoration: none;
     border-radius: 5px;
-    margin-top: auto; 
-    font-weight: 600; 
-    font-size: 0.95rem; 
+    margin-top: auto;
+    font-weight: 600;
+    font-size: 0.95rem;
     transition: background-color 0.3s ease;
-    align-self: flex-start; 
+    align-self: flex-start;
 }
-.btn-card:hover { background-color: #081a2e; }
+
+.btn-card:hover {
+    background-color: #081a2e;
+}
 
 /* --- 11. Rodapé --- */
 .main-footer {
     text-align: center;
-    padding: 30px; 
-    margin-top: 40px; 
-    background: var(--cor-primaria-azul); 
-    color: rgba(255, 255, 255, 0.8); 
+    padding: 30px;
+    margin-top: 40px;
+    background: var(--cor-primaria-azul);
+    color: rgba(255, 255, 255, 0.8);
     border-top: 4px solid var(--cor-secundaria-dourado);
 }
+
 .main-footer p {
-    margin-bottom: 10px; 
-    font-size: 0.9rem; 
+    margin-bottom: 10px;
+    font-size: 0.9rem;
 }
+
 .footer-logos {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px; 
-    margin: 20px 0; 
+    gap: 30px;
+    margin: 20px 0;
 }
+
 .footer-logos img {
-    max-height: 40px; 
+    max-height: 40px;
     width: auto;
 
+}
+
+/* --- Media Queries para Responsividade --- */
+
+/* Esconde menu desktop e mostra hamburger no mobile */
+@media (max-width: 992px) {
+    .header-app .nav-app {
+        display: none;
+    }
+
+    .hamburger-menu {
+        display: block;
+    }
 }
 
 @media (max-width: 610px) {
 
     /* --- AJUSTE CRÍTICO: Container para usar toda a largura --- */
     .container {
-        /* max-width e margin: auto mantidos, mas ajustando o padding para mobile */
-        padding: 0 15px; /* Reduz o padding lateral para ter mais espaço útil */
+        padding: 0 15px;
+        margin: 20px auto;
     }
-
 
     /* --- AJUSTE CRÍTICO: Header (375px) --- */
     .header-app {
-        /* padding: 15px 40px; é muito grande para 375px. Ajustando para: */
-        padding: 15px 15px; /* Menor padding lateral */
-        
-        /* Quebra o flex para o logo e navegação ficarem em linhas separadas */
-        flex-direction: column; 
-        align-items: flex-start; /* Alinha o conteúdo à esquerda */
+        padding: 15px 15px;
     }
 
     /* Ajusta o espaçamento do logo */
-    .header-app .header-logo-img { 
-        height: 45px; /* Diminui a altura do logo para caber melhor */
+    .header-app .header-logo-img {
+        height: 45px;
         margin-right: 10px;
     }
-    .header-app .logo-text strong { 
-        font-size: 1.2rem; /* Reduz um pouco o texto principal */
-    }
-    .header-app .logo-text span { 
-        font-size: 0.8rem; /* Reduz um pouco o subtítulo */
+
+    .header-app .logo-text strong {
+        font-size: 1.2rem;
     }
 
-    /* Ajusta a navegação */
-    .header-app .nav-app {
-        width: 100%; /* Ocupa toda a largura abaixo do logo */
-        flex-wrap: wrap; /* Permite que os itens quebrem linha */
-        justify-content: center; /* Centraliza os botões */
-        margin-top: 10px; /* Adiciona espaço entre logo e navegação */
-        gap: 8px; /* Aumenta um pouco o espaçamento entre os botões */
+    .header-app .logo-text span {
+        font-size: 0.8rem;
     }
-    .header-app .nav-app a {
-        padding: 8px 12px; /* Reduz o padding dos botões */
-        font-size: 0.85rem; /* Reduz a fonte dos botões */
-        white-space: normal; /* Permite a quebra de texto (opcional, mas ajuda) */
-    }
-    
-    
+
     /* --- AJUSTE GERAL: Fontes e Espaçamentos (375px) --- */
     .hero-banner {
-        padding: 30px 15px 40px 15px; /* Reduz o padding geral do banner */
+        padding: 30px 15px 40px 15px;
     }
+
     .hero-banner h1 {
-        font-size: 1.8rem; /* Reduz o título principal */
+        font-size: 1.8rem;
     }
+
     .hero-banner p {
-        font-size: 1rem; /* Reduz o parágrafo */
+        font-size: 1rem;
     }
-    
+
     .secoes-lado-a-lado {
-        /* Seção lado a lado já está como column em @media (max-width: 992px), mas 
-           garantindo que se mantenha. */
         flex-direction: column;
     }
-    
+
+    .secoes-lado-a-lado>section {
+        margin-bottom: 45px;
+        height: auto;
+    }
+
+    .secoes-lado-a-lado>section:last-child {
+        margin-bottom: 0;
+    }
+
     /* --- Cards Informativos (375px) --- */
     .cards-informativos {
-        /* Garante que o grid tenha 1 coluna para telas muito pequenas */
-        grid-template-columns: 1fr; 
-        gap: 15px; /* Reduz o gap entre cards */
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
-    .card { 
-        padding: 20px; /* Reduz o padding interno do card */
+
+    .card {
+        padding: 20px;
     }
-    .card h3 { 
-        font-size: 1.2rem; /* Reduz o título do card */
+
+    .card h3 {
+        font-size: 1.2rem;
     }
 
 
@@ -538,147 +846,33 @@ body {
     .main-footer {
         padding: 20px 15px;
     }
+
     .footer-logos {
-        gap: 15px; /* Reduz o espaçamento entre as logos */
-        flex-wrap: wrap; /* Permite que as logos quebrem a linha se não couberem */
+        gap: 15px;
+        flex-wrap: wrap;
     }
+
     .footer-logos img {
-        max-height: 30px; /* Reduz o tamanho das logos */
+        max-height: 30px;
     }
 
 
     /* --- Conteúdo interno das seções (7 e 8) --- */
-    .info-card, .guia-card {
-        gap: 10px; /* Reduz o espaçamento interno */
-        padding: 12px; /* Reduz o padding do card */
-    }
-    .info-text p, .guia-text p { 
-        font-size: 0.95rem; /* Leve redução para caber o texto */
-    }
-    .info-sustentabilidade h2, .guia-sustentabilidade h2 {
-        font-size: 1.5rem; /* Reduz os títulos das seções */
-        margin-bottom: 20px;
-    }
-
-}
-
-@media (max-width: 610px) {
-
-    /* --- AJUSTE CRÍTICO: Container e Espaçamento Geral (Mobile First) --- */
-    .container {
-        padding: 0 15px; /* Reduz o padding lateral para ter mais espaço útil */
-        margin: 20px auto; /* Reduz a margem vertical do container */
-    }
-
-    .section-spacing {
-        margin-bottom: 30px; /* Reduz o espaçamento entre seções */
-    }
-
-    /* --- AJUSTE CRÍTICO: Header e Navegação --- */
-    .header-app {
-        padding: 15px 15px; /* Menor padding lateral no header */
-        flex-direction: column; /* Empilha o logo e a navegação */
-        align-items: flex-start; /* Alinha o conteúdo à esquerda */
-    }
-
-    /* Ajuste do Logo */
-    .header-app .header-logo-img { 
-        height: 45px; /* Diminui a altura do logo */
-        margin-right: 10px;
-    }
-    .header-app .logo-text strong { 
-        font-size: 1.2rem; /* Reduz o texto principal do logo */
-    }
-    .header-app .logo-text span { 
-        font-size: 0.8rem; /* Reduz o subtítulo do logo */
-    }
-
-    /* Ajuste da Navegação */
-    .header-app .nav-app {
-        width: 100%; /* Ocupa toda a largura */
-        flex-wrap: wrap; /* Permite que os botões quebrem linha */
-        justify-content: center; /* Centraliza os botões */
-        margin-top: 10px; 
-        gap: 8px; 
-    }
-    .header-app .nav-app a {
-        padding: 8px 12px; /* Reduz o padding dos botões de navegação */
-        font-size: 0.85rem; /* Reduz a fonte dos botões */
-        white-space: normal;
-    }
-    
-    
-    /* --- Hero Banner --- */
-    .hero-banner {
-        padding: 30px 15px 40px 15px;
-    }
-    .hero-banner h1 {
-        font-size: 1.8rem;
-    }
-    .hero-banner p {
-        font-size: 1rem;
-    }
-    
-    /* --- Container Lado a Lado --- */
-    .secoes-lado-a-lado {
-        flex-direction: column;
-    }
-    .secoes-lado-a-lado > section {
-         margin-bottom: 30px; 
-    }
-    
-    /* --- Seções "Por que Cuidar?" (7) e "Guia Rápido" (8) --- */
-    .info-sustentabilidade h2, .guia-sustentabilidade h2 {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-    }
-    .info-card, .guia-card {
+    .info-card,
+    .guia-card {
         gap: 10px;
         padding: 12px;
     }
-    .info-text p, .guia-text p { 
-        font-size: 0.95rem; 
-    }
-    .info-icon-wrapper, .guia-icon-wrapper {
-        width: 35px; 
-        height: 35px;
-    }
-    .info-icon, .guia-icon {
-        font-size: 1.2rem;
+
+    .info-text p,
+    .guia-text p {
+        font-size: 0.95rem;
     }
 
-    /* --- Destaque Links (9) --- */
-    .link-destaque-container {
-        padding: 15px;
-        margin-top: 20px;
-    }
-    .link-botao {
-        font-size: 0.9rem;
-    }
-
-    /* --- Cards Informativos (10) --- */
-    .cards-informativos {
-        grid-template-columns: 1fr; /* Força 1 coluna nos cards principais */
-        gap: 15px;
-    }
-    .card { 
-        padding: 20px;
-    }
-    .card h3 { 
-        font-size: 1.2rem;
-    }
-    
-    /* --- Ajuste no Rodapé (11) --- */
-    .main-footer {
-        padding: 20px 15px;
-        margin-top: 30px;
-    }
-    .footer-logos {
-        gap: 15px; 
-        flex-wrap: wrap; 
-    }
-    .footer-logos img {
-        max-height: 30px; 
+    .info-sustentabilidade h2,
+    .guia-sustentabilidade h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
     }
 
 }

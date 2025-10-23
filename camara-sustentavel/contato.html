@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato | Tatuí Sustentável</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contato.css">
+    <link rel="icon" href="./assets/brasao-tatui.webp" type="image/webp">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div id="loading-screen">
+        <img src="./assets/brasao-tatui.webp" alt="Carregando..." class="loading-logo">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <header class="header-app">
+        <a href="../index.html" class="logo-link">
+            <img src="./assets/brasao-tatui.webp" alt="Brasão de Tatuí" class="header-logo-img">
+            <div class="logo-text">
+                <strong>Prefeitura de Tatuí</strong>
+                <span><b>Sistema de Gestão Sustentável</b></span>
+            </div>
+        </a>
+
+        <ul class="nav-app">
+            <li><a href="../index.html">Início</a></li>
+            <li><a href="mapa.html">Onde Descartar?</a></li>
+            <li><a href="dashboard.html">Visão Geral</a></li>
+            <li><a href="contato.html" class="active"><b></b>Contato</a></li>
+        </ul>
+
+        <button class="hamburger-menu" id="hamburger-menu">
+            <span class="hamburger-icon"></span>
+            <span class="hamburger-icon"></span>
+            <span class="hamburger-icon"></span>
+        </button>
+    </header>
+
+    <nav id="mobile-menu" class="mobile-nav-overlay">
+        <div class="mobile-nav-panel">
+            <div class="mobile-nav-header">
+                <img src="./assets/brasao-tatui.webp" alt="Brasão de Tatuí" class="menu-header-logo">
+                <span>Menu Principal</span>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="../index.html"><i class="fas fa-home menu-icon"></i><span>Início</span></a></li>
+                <li><a href="mapa.html"><i class="fas fa-map-marked-alt menu-icon"></i><span>Onde Descartar?</span></a></li>
+                <li><a href="dashboard.html"><i class="fas fa-chart-line menu-icon"></i><span>Visão Geral</span></a></li>
+                <li><a href="contato.html" class="active"><i class="fas fa-envelope menu-icon"></i><span>Contato</span></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="page-header">
+            <h1>Fale Conosco</h1>
+            <p>Sua opinião é muito importante para nós. Preencha o formulário abaixo ou utilize um dos nossos canais de atendimento.</p>
+        </section>
+
+        <div class="contact-content">
+            <div class="contact-form-wrapper">
+                <h1>Envie sua Mensagem</h1>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nome:</label>
+                        <input type="text" id="name" name="name" placeholder="Digite seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="seu.email@exemplo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem:</label>
+                        <textarea id="message" name="message" placeholder="Escreva sua dúvida, sugestão ou crítica aqui..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="submitButton">Enviar Mensagem <i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </form>
+                <p id="successMessage" class="success-message">Mensagem enviada com sucesso! Agradecemos seu contato.</p>
+            </div>
+
+            <div class="contact-info-wrapper">
+                <h1>Nossos Contatos</h1>
+                <div class="contact-details">
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> <strong>Endereço:</strong> Av. Domingos Bassi, 1000, Jd. Junqueira, Tatuí - SP, 18271-330</li>
+                        <li><i class="fas fa-phone-alt"></i> <strong>Telefone:</strong> (15) 3259-8400</li>
+                        <li><i class="fas fa-envelope"></i> <strong>Email:</strong> contato@tatuisustentavel.sp.gov.br</li>
+                        <li><i class="fas fa-clock"></i> <strong>Horário:</strong> Segunda a Sexta, das 9h às 17h</li>
+                    </ul>
+                </div>
+
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3663.663119861614!2d-47.85761368551528!3d-23.36449436153664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c5d5067211516b%3A0x6b453e9b3a033b0e!2sAv.%20Dr.%20Domingos%20Bassi%2C%201000%20-%20Jardim%20Junqueira%2C%20Tatu%C3%AD%20-%20SP%2C%2018271-330!5e0!3m2!1spt-BR!2sbr!4v1678886543210!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <div class="social-media">
+                    <h2>Siga-nos nas Redes</h2>
+                    <div class="social-icons">
+                        <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>Projeto Ideathon - Semana Tech 2025</p>
+        <div class="footer-logos">
+            <img src="./assets/brasao-tatui.webp" alt="Brasão de Tatuí">
+            <img src="./assets/logo-fatec.png" alt="Logo Fatec Tatuí">
+            <img src="./assets/logo-point-media.jpg" alt="Logo Point Media">
+        </div>
+        <p>© 2025 - Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="js/global.js"></script>
+    <script src="js/contato.js"></script>
+</body>
+</html>

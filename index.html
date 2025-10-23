@@ -6,24 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Câmara 4.0 - Tatuí Sustentável</title>
     <link rel="stylesheet" href="camara-sustentavel/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="camara-sustentavel/assets/brasao-tatui.webp" type="image/webp">
 </head>
 
 <body>
+    <div id="loading-screen">
+        <img src="camara-sustentavel/assets/brasao-tatui.webp" alt="Carregando..." class="loading-logo">
+        <div class="loading-spinner"></div>
+    </div>
 
     <header class="header-app">
-        <a href="index.html" class="logo-link">
-            <img src="camara-sustentavel/assets/brasao-tatui.webp" alt="Brasão de Tatuí" class="header-logo-img">
-            <div class="logo-text">
-                <strong>Prefeitura de Tatuí</strong>
-                <span><b>Sistema de Gestão Sustentável</b></span>
-            </div>
-        </a>
-        <ul class="nav-app">
-            <li><a href="index.html" class="active"><b></b>Início</a></li>
-            <li><a href="camara-sustentavel/mapa.html">Onde Descartar?</a></li>
-            <li><a href="camara-sustentavel/dashboard.html">Visão Geral</a></li>
+    <a href="index.html" class="logo-link">
+        <img src="camara-sustentavel/assets/brasao-tatui.webp" alt="Brasão de Tatuí" class="header-logo-img">
+        <div class="logo-text">
+            <strong>Prefeitura de Tatuí</strong>
+            <span><b>Sistema de Gestão Sustentável</b></span>
+        </div>
+    </a>
+
+    <ul class="nav-app">
+        <li><a href="index.html" class="active"><b></b>Início</a></li>
+        <li><a href="camara-sustentavel/mapa.html">Onde Descartar?</a></li>
+        <li><a href="camara-sustentavel/dashboard.html">Visão Geral</a></li>
+        <li><a href="camara-sustentavel/contato.html">Contato</a></li>
+    </ul>
+
+    <button class="hamburger-menu" id="hamburger-menu">
+        <span class="hamburger-icon"></span>
+        <span class="hamburger-icon"></span>
+        <span class="hamburger-icon"></span>
+    </button>
+</header>
+
+<nav id="mobile-menu" class="mobile-nav-overlay">
+    <div class="mobile-nav-panel">
+        <div class="mobile-nav-header">
+            <img src="camara-sustentavel/assets/brasao-tatui.webp" alt="Brasão de Tatuí" class="menu-header-logo">
+            <span>Menu Principal</span>
+        </div>
+
+        <ul class="mobile-nav-links">
+            <li>
+                <a href="index.html" class="active">
+                    <i class="fas fa-home menu-icon"></i> <span>Início</span>
+                </a>
+            </li>
+            <li>
+                <a href="camara-sustentavel/mapa.html">
+                    <i class="fas fa-map-marked-alt menu-icon"></i> <span>Onde Descartar?</span>
+                </a>
+            </li>
+            <li>
+                <a href="camara-sustentavel/dashboard.html">
+                    <i class="fas fa-chart-line menu-icon"></i> <span>Visão Geral</span>
+                </a>
+            </li>
+            <li>
+                <a href="camara-sustentavel/contato.html">
+                    <i class="fas fa-envelope menu-icon"></i> <span>Contato</span>
+                </a>
+            </li>
         </ul>
-    </header>
+    </div>
+</nav>
 
     <main class="container">
         <section class="hero-banner section-spacing">

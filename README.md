@@ -68,6 +68,16 @@ Este projeto foi desenvolvido como parte do **Ideathon - Semana Tech 2025**, em 
 *   **Fatec Tatuí**
 *   **Point Media**
 
+## Ideias para o Futuro
+
+Para a evolução do projeto, algumas ideias que podem ser implementadas são:
+
+*   **Integração com Banco de Dados:** Conectar o sistema ao banco de dados da prefeitura para obter dados mais precisos e em tempo real.
+*   **Expansão para Outros Municípios:** Adaptar a plataforma para que possa ser utilizada por outras cidades.
+*   **Painel Administrativo:** Criar uma área de administração para que a equipe da prefeitura possa gerenciar o conteúdo e os dados da plataforma.
+*   **Formulário de Interação:** Adicionar um formulário para que o público possa enviar sugestões e interagir com a plataforma.
+*   **Dados Locais:** Para o MVP, os dados podem ser armazenados localmente no navegador utilizando `localStorage`.
+
 ## Contribuição
 
 Contribuições são bem-vindas! Se você tiver alguma ideia para melhorar o projeto, sinta-se à vontade para abrir uma *issue* ou enviar um *pull request*.
