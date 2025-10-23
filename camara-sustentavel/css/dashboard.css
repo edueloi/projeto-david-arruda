@@ -358,9 +358,7 @@
 
     /* --- AJUSTE CRÍTICO: Header e Navegação --- */
     .header-app {
-        padding: 15px 15px; /* Menor padding lateral no header */
-        flex-direction: column; /* Empilha o logo e a navegação */
-        align-items: flex-start; /* Alinha o conteúdo à esquerda */
+      padding: 15px 15px;
     }
 
     /* Ajuste do Logo */

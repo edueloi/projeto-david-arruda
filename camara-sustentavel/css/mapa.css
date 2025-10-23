@@ -408,9 +408,7 @@
 
   /* --- AJUSTE CRÍTICO: Header (Responsividade para 375px) --- */
   .header-app {
-    padding: 15px 15px; /* Menor padding lateral */
-    flex-direction: column; /* Quebra o flex para o logo e navegação ficarem em linhas separadas */
-    align-items: flex-start; /* Alinha o conteúdo à esquerda */
+    padding: 15px 15px;
   }
 
   /* Ajusta o espaçamento e tamanho do logo */
