@@ -52,13 +52,13 @@ cd Sistema-de-Gest-o-Sustent-vel---Tatu--main
 
 
 **Página Inicial**
-![Página Inicial](url_da_imagem_da_pagina_inicial)
+![Página Inicial](camara-sustentavel/assets/pagina-inicial.png)
 
 **Mapa de Descarte**
-![Mapa de Descarte](url_da_imagem_do_mapa)
+![Mapa de Descarte](camara-sustentavel/assets/mapa-descarte.png)
 
 **Dashboard de Gestão**
-![Dashboard de Gestão](url_da_imagem_do_dashboard)
+![Dashboard de Gestão](camara-sustentavel/assets/dashboard-gestao.png)
 
 ## Desenvolvimento
 
