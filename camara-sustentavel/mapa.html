@@ -125,9 +125,72 @@
     </main>
 
     <div id="modal-denuncia-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Denunciar Local com Entulho</h2>
+                <button id="modal-close-btn" class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Anexe uma foto e escolha como fornecer a localização do entulho.</p>
+                <form id="form-denuncia">
+                    <label for="foto-entulho">Anexar Foto (Obrigatório)</label>
+                    <input type="file" id="foto-entulho" name="foto-entulho" accept="image/*" required>
+                    <label for="endereco-entulho">Endereço (Opcional)</label>
+                    <input type="text" id="endereco-entulho" name="endereco-entulho"
+                        placeholder="Ex: Rua XV de Novembro, em frente ao nº 500">
+                    <label for="obs-entulho">Observações (Opcional)</label>
+                    <textarea id="obs-entulho" name="obs-entulho" rows="3"
+                        placeholder="Ex: Entulho na esquina com a Rua..."></textarea>
+                    <div class="modal-actions">
+                        <button type="button" id="btn-usar-localizacao" class="btn-modal-primary"><span
+                                class="icon-location">📌</span> Usar Minha Localização</button>
+                        <button type="submit" id="btn-enviar-endereco" class="btn-modal-secondary">Enviar com
+                            Endereço</button>
+                    </div>
+                </form>
+            </div>
         </div>
+    </div>
+
     <div id="modal-cadastro-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sugerir Novo Ecoponto</h2>
+                <button id="modal-cadastro-close-btn" class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Preencha os dados do ponto de coleta. Sua sugestão será enviada para validação.</p>
+                <form id="form-cadastro">
+                    <label for="nome-ponto">Nome do Ponto (Obrigatório)</label>
+                    <input type="text" id="nome-ponto" name="nome-ponto" placeholder="Ex: Supermercado São Roque"
+                        required>
+                    <label for="endereco-ponto">Endereço (Obrigatório)</label>
+                    <input type="text" id="endereco-ponto" name="endereco-ponto"
+                        placeholder="Ex: Rua Onze de Agosto, 1000" required>
+                    <label>Quais resíduos aceita? (Obrigatório)</label>
+                    <ul class="filtro-lista-modal">
+                        <li><label><input type="checkbox" name="tipos-ponto" value="papel"> <span
+                                    class="filtro-icone papel"></span> Papel</label></li>
+                        <li><label><input type="checkbox" name="tipos-ponto" value="plastico"> <span
+                                    class="filtro-icone plastico"></span> Plástico</label></li>
+                        <li><label><input type="checkbox" name="tipos-ponto" value="vidro"> <span
+                                    class="filtro-icone vidro"></span> Vidro</label></li>
+                        <li><label><input type="checkbox" name="tipos-ponto" value="eletronicos"> <span
+                                    class="filtro-icone eletronicos"></span> Eletrônicos</label></li>
+                        <li><label><input type="checkbox" name="tipos-ponto" value="organico"> <span
+                                    class="filtro-icone organico"></span> Orgânico</label></li>
+                        <li><label><input type="checkbox" name="tipos-ponto" value="metal"> <span
+                                    class="filtro-icone metal"></span> Metal</label></li>
+                        <li><label><input type="checkbox" name="tipos-ponto" value="pilhas"> <span
+                                    class="filtro-icone pilhas"></span> Pilhas e Baterias</label></li>
+                    </ul>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn-modal-primary">Enviar Sugestão</button>
+                    </div>
+                </form>
+            </div>
         </div>
+    </div>
 
     <footer class="main-footer">
         <p>Projeto Ideathon - Semana Tech 2025</p>
